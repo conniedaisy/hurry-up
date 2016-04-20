@@ -102,6 +102,7 @@ class AllEvents extends Component {
           )}
           <Text style={styles.welcome}>no more events</Text>
         </ScrollView>
+
         <TouchableHighlight
           style={styles.button}
           onPress={this.buttonClicked.bind(this)}>
@@ -109,6 +110,7 @@ class AllEvents extends Component {
             <Text style={styles.buttonText}>Refresh!</Text>
           </View>
         </TouchableHighlight>
+
       </View>
     );
   }
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
     fontFamily: 'HelveticaNeue',
   },
   button: {
-    padding: 15,
+    padding: 20,
     width: deviceWidth,
     alignItems: 'center',
     backgroundColor: '#34778A',
