@@ -102,11 +102,10 @@ var sendText = function(userPhoneNumber, event, timeoutTime) {
     }
   );
   
-  //archive event in database after it starts
-  console.log('eventTime >>>>>', event.eventTime);
-  console.log('new Date().getTime() >>>>>', new Date().getTime());
-  var time = parseInt(Date.parse(event.eventTime) - (new Date().getTime()))
-  console.log('time >>>>>', time);
+  // archive event in database after it starts
+
+  // var time = parseInt(Date.parse(event.eventTime) - (new Date().getTime()))
+  
   setTimeout(function() {
     console.log('setTimeout is invoked!!!!!');
     new Event({id: event.id})
@@ -122,7 +121,7 @@ var sendText = function(userPhoneNumber, event, timeoutTime) {
     if (event.repeat !== 'Never') {
       setRecurringEventTime(event); 
     }
-  }, time);
+  }, timeoutTime);
 }
 
 
