@@ -102,10 +102,11 @@ var sendText = function(userPhoneNumber, event, timeoutTime) {
     }
   );
   
-  // archive event in database after it starts
 
   // var time = parseInt(Date.parse(event.eventTime) - (new Date().getTime()))
   
+  // archive event in database after it starts
+  console.log('timeoutTime: ', timeoutTime);
   setTimeout(function() {
     console.log('setTimeout is invoked!!!!!');
     new Event({id: event.id})
