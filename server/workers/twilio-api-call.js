@@ -52,21 +52,17 @@ var addRecurringEvent = function(event, eventTime) {
       newEvent.save()
         .then(function(createdEvent) {
           // console.log('Created new recurring event: ', createdEvent);
-          // res.status(201).send(createdEvent);
         })
         .catch(function(err) {
           console.error('Could not create new recurring event 1: ', err);
-          // res.status(500).send(err);
         });
     })
     .catch(function(err) {
       console.error('Could not create new recurring event 2: ', err);
-      // res.status(500).send(err);
     });
 };
 
 var setRecurringEventTime = function(event) {
-  console.log('setRecurringEventTime is called!!!!!');
   var time, newEventTime;
 
   if (event.repeat === 'Daily') {
@@ -104,17 +100,12 @@ var sendText = function(userPhoneNumber, event, timeoutTime) {
     }
   );
   
-
-  // var time = parseInt(Date.parse(event.eventTime) - (new Date().getTime()))
-  
   if (events[event.id]) {
     clearTimeout(events[event.id]);
   }
 
   // archive event in database after it starts
-  console.log('timeoutTime: ', timeoutTime);
   events[event.id] = setTimeout(function() {
-    console.log('setTimeout is invoked!!!!!');
     new Event({id: event.id})
       .fetch()
       .then(function(event) {
@@ -130,6 +121,5 @@ var sendText = function(userPhoneNumber, event, timeoutTime) {
     }
   }, timeoutTime);
 }
-
 
 module.exports = sendText;
