@@ -7,6 +7,8 @@ var moment     = require('moment');
 //require the Twilio module and create a REST client
 var client = require('twilio')(Keys.twilioAccountSid, Keys.twilioAuthToken);
 
+var events = {};
+
 var displayTime = function(time) {
   var dateString = time.toString();
   var hours = dateString.substring(16,18);
@@ -49,7 +51,7 @@ var addRecurringEvent = function(event, eventTime) {
       });
       newEvent.save()
         .then(function(createdEvent) {
-          console.log('Created new recurring event: ', createdEvent);
+          // console.log('Created new recurring event: ', createdEvent);
           // res.status(201).send(createdEvent);
         })
         .catch(function(err) {
@@ -105,9 +107,13 @@ var sendText = function(userPhoneNumber, event, timeoutTime) {
 
   // var time = parseInt(Date.parse(event.eventTime) - (new Date().getTime()))
   
+  if (events[event.id]) {
+    clearTimeout(events[event.id]);
+  }
+
   // archive event in database after it starts
   console.log('timeoutTime: ', timeoutTime);
-  setTimeout(function() {
+  events[event.id] = setTimeout(function() {
     console.log('setTimeout is invoked!!!!!');
     new Event({id: event.id})
       .fetch()
